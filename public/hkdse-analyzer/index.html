@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKDSE Results Analyzer</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="analyzer.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="analyzer-header">
+        <div class="container">
+            <nav class="nav-bar">
+                <a href="../" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Hub
+                </a>
+                <h1>HKDSE Results Analyzer</h1>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="analyzer-content">
+            <!-- Controls Panel -->
+            <section class="controls-panel">
+                <div class="controls-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="viewType">View Type:</label>
+                        <select id="viewType" class="form-select">
+                            <option value="distribution">Grade Distribution</option>
+                            <option value="cumulative">Cumulative Results</option>
+                            <option value="comparison">Day vs All Candidates</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="chartType">Chart Type:</label>
+                        <select id="chartType" class="form-select">
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="doughnut">Pie Chart</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="dataType">Data Type:</label>
+                        <select id="dataType" class="form-select">
+                            <option value="number">Number of Candidates</option>
+                            <option value="percentage">Percentage</option>
+                        </select>
+                    </div>
+
+                    <button id="updateChart" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Update Chart
+                    </button>
+                </div>
+            </section>
+
+            <!-- Statistics Summary -->
+            <section class="stats-summary">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalCandidates">--</div>
+                            <div class="stat-label">Total Candidates</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="topPerformers">--</div>
+                            <div class="stat-label">Top Grade (35-33)</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="passRate">--</div>
+                            <div class="stat-label">Pass Rate (≥20)</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="excellenceRate">--</div>
+                            <div class="stat-label">Excellence Rate (≥30)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chart Container -->
+            <section class="chart-container">
+                <h2 id="chartTitle">HKDSE Results Distribution</h2>
+                <div class="chart-wrapper">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Data Table -->
+            <section class="data-table-section">
+                <h3>Detailed Results</h3>
+                <div class="table-container">
+                    <table id="dataTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Grade Range</th>
+                                <th>Day School</th>
+                                <th>Day School %</th>
+                                <th>All Candidates</th>
+                                <th>All Candidates %</th>
+                                <th>Cumulative</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Export Options -->
+            <section class="export-section">
+                <h3>Export Data</h3>
+                <div class="export-buttons">
+                    <button id="exportPNG" class="btn btn-secondary">
+                        <i class="fas fa-image"></i> Export as PNG
+                    </button>
+                    <button id="exportCSV" class="btn btn-secondary">
+                        <i class="fas fa-file-csv"></i> Export as CSV
+                    </button>
+                    <button id="exportJSON" class="btn btn-secondary">
+                        <i class="fas fa-file-code"></i> Export as JSON
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../scripts/main.js"></script>
+    <script src="analyzer.js"></script>
+</body>
+</html>

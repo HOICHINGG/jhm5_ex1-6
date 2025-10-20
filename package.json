@@ -1,0 +1,26 @@
+{
+  "name": "jhm5-ex1-6",
+  "version": "1.0.0",
+  "description": "Multi-application hub with HKDSE analyzer, Math Rush game, and TicTacToe variants",
+  "main": "public/index.html",
+  "scripts": {
+    "dev": "npx wrangler pages dev public",
+    "deploy": "npx wrangler deploy",
+    "build": "echo 'No build step required for static files'",
+    "preview": "npx wrangler pages dev public --port 3000"
+  },
+  "keywords": [
+    "hkdse",
+    "math-game",
+    "tictactoe",
+    "react",
+    "vanilla-js",
+    "cloudflare-pages"
+  ],
+  "author": "HOICHINGG",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HOICHINGG/jhm5_ex1-6.git"
+  }
+}

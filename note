@@ -1,0 +1,9 @@
+The web page should be bulding dsome application below:
+1. landing page of the other applications below
+2. a HKDSE analyser (based on the data table 3f) and using cloudflare D1
+3. a "math rush" app (a game to play with <- x/ with timelimit) with leaderboard 
+4. independent a client side tictactoe app using html, css and js 
+5. independent a client side tictactoe app using localstorage and react
+6. independent a server side tictactoe app using same code of 3 but using cloudflare KV and server side API
+
+give me the design structure before implement.

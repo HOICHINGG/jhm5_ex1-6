@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JHM5 Applications Hub</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">JHM5 Applications Hub</h1>
+            <p class="hero-subtitle">A collection of educational and gaming applications</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="apps-grid">
+            <div class="app-card" data-app="hkdse">
+                <div class="app-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>HKDSE Analyzer</h3>
+                <p>Analyze Hong Kong DSE examination results with interactive charts and statistics</p>
+                <a href="hkdse-analyzer/" class="btn btn-primary">
+                    Launch App <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="app-card" data-app="math">
+                <div class="app-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Math Rush</h3>
+                <p>Test your math skills in this fast-paced calculation game with global leaderboard</p>
+                <a href="math-rush/" class="btn btn-primary">
+                    Play Game <i class="fas fa-play"></i>
+                </a>
+            </div>
+
+            <div class="app-card" data-app="tictactoe-vanilla">
+                <div class="app-icon">
+                    <i class="fas fa-hashtag"></i>
+                </div>
+                <h3>TicTacToe Classic</h3>
+                <p>Classic TicTacToe game built with pure HTML, CSS, and JavaScript</p>
+                <a href="tictactoe-vanilla/" class="btn btn-primary">
+                    Play Classic <i class="fas fa-gamepad"></i>
+                </a>
+            </div>
+
+            <div class="app-card" data-app="tictactoe-react">
+                <div class="app-icon">
+                    <i class="fab fa-react"></i>
+                </div>
+                <h3>TicTacToe React</h3>
+                <p>Enhanced TicTacToe with React and local storage for game history</p>
+                <a href="tictactoe-react/" class="btn btn-primary">
+                    Play React <i class="fas fa-history"></i>
+                </a>
+            </div>
+
+            <div class="app-card" data-app="tictactoe-server">
+                <div class="app-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3>TicTacToe Multiplayer</h3>
+                <p>Play TicTacToe online with friends using server-side game state</p>
+                <a href="tictactoe-server/" class="btn btn-primary">
+                    Play Online <i class="fas fa-users"></i>
+                </a>
+            </div>
+
+            <div class="app-card" data-app="about">
+                <div class="app-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3>About</h3>
+                <p>Learn more about this project and the technologies used</p>
+                <a href="#about" class="btn btn-secondary">
+                    Learn More <i class="fas fa-book"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <h2>About This Project</h2>
+                <p>This is a showcase of various web applications demonstrating different technologies and approaches:</p>
+                <ul>
+                    <li><strong>HKDSE Analyzer:</strong> Data visualization using Chart.js and Cloudflare D1</li>
+                    <li><strong>Math Rush:</strong> Interactive game with leaderboard system</li>
+                    <li><strong>TicTacToe Variants:</strong> Three different implementations showcasing various tech stacks</li>
+                </ul>
+                <div class="tech-stack">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">React</span>
+                        <span class="tech-badge">Chart.js</span>
+                        <span class="tech-badge">Cloudflare Workers</span>
+                        <span class="tech-badge">Cloudflare D1</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 JHM5 Applications Hub. Built with ❤️ for learning and fun.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

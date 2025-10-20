@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe Classic - HTML/CSS/JS</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="tictactoe.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="game-header">
+        <div class="container">
+            <nav class="nav-bar">
+                <a href="../" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Hub
+                </a>
+                <h1><i class="fas fa-hashtag"></i> TicTacToe Classic</h1>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Game Setup Screen -->
+        <div id="setupScreen" class="screen active">
+            <div class="setup-container">
+                <div class="game-logo">
+                    <i class="fas fa-hashtag"></i>
+                    <h2>TicTacToe Classic</h2>
+                    <p>Pure HTML, CSS & JavaScript</p>
+                </div>
+
+                <div class="setup-form">
+                    <div class="form-group">
+                        <label class="form-label">Game Mode:</label>
+                        <div class="mode-selection">
+                            <button class="mode-btn active" data-mode="pvp">
+                                <i class="fas fa-users"></i>
+                                <span>Player vs Player</span>
+                            </button>
+                            <button class="mode-btn" data-mode="pvc">
+                                <i class="fas fa-robot"></i>
+                                <span>Player vs Computer</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="difficultyGroup" style="display: none;">
+                        <label class="form-label" for="difficulty">AI Difficulty:</label>
+                        <select id="difficulty" class="form-select">
+                            <option value="easy">Easy (Random moves)</option>
+                            <option value="medium" selected>Medium (Smart moves)</option>
+                            <option value="hard">Hard (Minimax AI)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="player1Name">Player 1 (X):</label>
+                        <input type="text" id="player1Name" class="form-input" placeholder="Player 1" maxlength="15">
+                    </div>
+
+                    <div class="form-group" id="player2Group">
+                        <label class="form-label" for="player2Name">Player 2 (O):</label>
+                        <input type="text" id="player2Name" class="form-input" placeholder="Player 2" maxlength="15">
+                    </div>
+
+                    <button id="startGame" class="btn btn-primary btn-large">
+                        <i class="fas fa-play"></i> Start Game
+                    </button>
+                </div>
+
+                <div class="game-stats-summary" id="statsSection">
+                    <h3>Game Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalGames">0</div>
+                            <div class="stat-label">Total Games</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="player1Wins">0</div>
+                            <div class="stat-label" id="player1Label">Player 1 Wins</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="player2Wins">0</div>
+                            <div class="stat-label" id="player2Label">Player 2 Wins</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="draws">0</div>
+                            <div class="stat-label">Draws</div>
+                        </div>
+                    </div>
+                    <button id="resetStats" class="btn btn-secondary">
+                        <i class="fas fa-refresh"></i> Reset Statistics
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-container">
+                <div class="game-header-info">
+                    <div class="players-info">
+                        <div class="player-card active" id="player1Card">
+                            <div class="player-symbol">X</div>
+                            <div class="player-name" id="currentPlayer1Name">Player 1</div>
+                            <div class="player-score" id="currentPlayer1Score">0</div>
+                        </div>
+                        <div class="game-status">
+                            <div class="current-turn" id="turnIndicator">Player 1's Turn</div>
+                            <div class="game-progress">Game 1</div>
+                        </div>
+                        <div class="player-card" id="player2Card">
+                            <div class="player-symbol">O</div>
+                            <div class="player-name" id="currentPlayer2Name">Player 2</div>
+                            <div class="player-score" id="currentPlayer2Score">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-board-container">
+                    <div class="game-board" id="gameBoard">
+                        <div class="game-cell" data-index="0"></div>
+                        <div class="game-cell" data-index="1"></div>
+                        <div class="game-cell" data-index="2"></div>
+                        <div class="game-cell" data-index="3"></div>
+                        <div class="game-cell" data-index="4"></div>
+                        <div class="game-cell" data-index="5"></div>
+                        <div class="game-cell" data-index="6"></div>
+                        <div class="game-cell" data-index="7"></div>
+                        <div class="game-cell" data-index="8"></div>
+                    </div>
+                    <div class="winning-line" id="winningLine"></div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="newGame" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> New Game
+                    </button>
+                    <button id="backToSetup" class="btn btn-secondary">
+                        <i class="fas fa-cog"></i> Settings
+                    </button>
+                    <button id="undoMove" class="btn btn-secondary" disabled>
+                        <i class="fas fa-undo"></i> Undo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="gameOverModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="result-icon" id="resultIcon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 id="resultTitle">Game Over!</h3>
+                </div>
+                <div class="modal-body">
+                    <p id="resultMessage">It's a draw!</p>
+                    <div class="game-summary">
+                        <div class="summary-item">
+                            <span>Moves played:</span>
+                            <span id="movesCount">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Game duration:</span>
+                            <span id="gameDuration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="playAgain" class="btn btn-primary">
+                        <i class="fas fa-play"></i> Play Again
+                    </button>
+                    <button id="backToMenu" class="btn btn-secondary">
+                        <i class="fas fa-home"></i> Main Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/main.js"></script>
+    <script src="tictactoe.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Rush - Fast Calculation Game</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="math-rush.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="game-header">
+        <div class="container">
+            <nav class="nav-bar">
+                <a href="../" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Hub
+                </a>
+                <h1><i class="fas fa-calculator"></i> Math Rush</h1>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Game Setup Screen -->
+        <div id="setupScreen" class="screen active">
+            <div class="setup-container">
+                <div class="game-logo">
+                    <i class="fas fa-bolt"></i>
+                    <h2>Math Rush</h2>
+                    <p>Test your calculation speed!</p>
+                </div>
+
+                <div class="setup-form">
+                    <div class="form-group">
+                        <label class="form-label" for="playerName">Player Name:</label>
+                        <input type="text" id="playerName" class="form-input" placeholder="Enter your name" maxlength="20">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="difficulty">Difficulty:</label>
+                        <select id="difficulty" class="form-select">
+                            <option value="easy">Easy (1-50, +/-)</option>
+                            <option value="medium" selected>Medium (1-100, +/-/×)</option>
+                            <option value="hard">Hard (1-200, +/-/×/÷)</option>
+                            <option value="expert">Expert (1-500, All operations)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="gameTime">Game Duration:</label>
+                        <select id="gameTime" class="form-select">
+                            <option value="60">1 Minute</option>
+                            <option value="120" selected>2 Minutes</option>
+                            <option value="180">3 Minutes</option>
+                            <option value="300">5 Minutes</option>
+                        </select>
+                    </div>
+
+                    <button id="startGame" class="btn btn-primary btn-large">
+                        <i class="fas fa-play"></i> Start Game
+                    </button>
+                </div>
+
+                <div class="instructions">
+                    <h3>How to Play:</h3>
+                    <ul>
+                        <li>Solve as many math problems as possible</li>
+                        <li>Type your answer and press Enter</li>
+                        <li>Correct answers earn points</li>
+                        <li>Wrong answers have no penalty</li>
+                        <li>Beat your best score!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-container">
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="currentScore">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value timer" id="timeLeft">2:00</div>
+                        <div class="stat-label">Time Left</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="streak">0</div>
+                        <div class="stat-label">Streak</div>
+                    </div>
+                </div>
+
+                <div class="problem-container">
+                    <div class="problem-display">
+                        <span id="problemText">12 + 8 = ?</span>
+                    </div>
+                    <div class="answer-input">
+                        <input type="number" id="answerInput" class="answer-field" placeholder="Your answer" autocomplete="off">
+                        <button id="submitAnswer" class="btn btn-primary">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="feedback" id="feedback"></div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <button id="pauseGame" class="btn btn-secondary">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="results-container">
+                <div class="results-header">
+                    <i class="fas fa-trophy"></i>
+                    <h2>Game Over!</h2>
+                </div>
+
+                <div class="final-stats">
+                    <div class="final-stat">
+                        <div class="final-value" id="finalScore">0</div>
+                        <div class="final-label">Final Score</div>
+                    </div>
+                    <div class="final-stat">
+                        <div class="final-value" id="correctAnswers">0</div>
+                        <div class="final-label">Correct Answers</div>
+                    </div>
+                    <div class="final-stat">
+                        <div class="final-value" id="accuracy">0%</div>
+                        <div class="final-label">Accuracy</div>
+                    </div>
+                    <div class="final-stat">
+                        <div class="final-value" id="maxStreak">0</div>
+                        <div class="final-label">Best Streak</div>
+                    </div>
+                </div>
+
+                <div class="performance-message" id="performanceMessage"></div>
+
+                <div class="results-actions">
+                    <button id="playAgain" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> Play Again
+                    </button>
+                    <button id="viewLeaderboard" class="btn btn-secondary">
+                        <i class="fas fa-list"></i> View Leaderboard
+                    </button>
+                    <button id="backToSetup" class="btn btn-secondary">
+                        <i class="fas fa-cog"></i> Change Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="leaderboardScreen" class="screen">
+            <div class="leaderboard-container">
+                <div class="leaderboard-header">
+                    <h2><i class="fas fa-trophy"></i> Leaderboard</h2>
+                    <div class="difficulty-tabs">
+                        <button class="tab-btn active" data-difficulty="all">All</button>
+                        <button class="tab-btn" data-difficulty="easy">Easy</button>
+                        <button class="tab-btn" data-difficulty="medium">Medium</button>
+                        <button class="tab-btn" data-difficulty="hard">Hard</button>
+                        <button class="tab-btn" data-difficulty="expert">Expert</button>
+                    </div>
+                </div>
+
+                <div class="leaderboard-content">
+                    <div class="leaderboard-list" id="leaderboardList">
+                        <!-- Leaderboard entries will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="leaderboard-actions">
+                    <button id="clearLeaderboard" class="btn btn-secondary">
+                        <i class="fas fa-trash"></i> Clear Scores
+                    </button>
+                    <button id="backFromLeaderboard" class="btn btn-primary">
+                        <i class="fas fa-arrow-left"></i> Back to Game
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pause Screen -->
+        <div id="pauseScreen" class="screen">
+            <div class="pause-container">
+                <h2><i class="fas fa-pause"></i> Game Paused</h2>
+                <p>Take a break and resume when you're ready!</p>
+                <div class="pause-actions">
+                    <button id="resumeGame" class="btn btn-primary btn-large">
+                        <i class="fas fa-play"></i> Resume Game
+                    </button>
+                    <button id="quitGame" class="btn btn-secondary">
+                        <i class="fas fa-stop"></i> Quit Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/main.js"></script>
+    <script src="math-rush.js"></script>
+</body>
+</html>

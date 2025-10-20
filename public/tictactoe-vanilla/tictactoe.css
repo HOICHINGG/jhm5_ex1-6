@@ -1,0 +1,500 @@
+/* TicTacToe Classic Styles */
+.game-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 0;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    min-height: 80vh;
+    padding: 2rem 0;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Setup Screen */
+.setup-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.game-logo {
+    margin-bottom: 3rem;
+}
+
+.game-logo i {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.game-logo h2 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.setup-form {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+    text-align: left;
+}
+
+.mode-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.mode-btn {
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mode-btn:hover {
+    border-color: var(--primary-color);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.mode-btn.active {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
+}
+
+.mode-btn i {
+    font-size: 1.5rem;
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Game Statistics Summary */
+.game-stats-summary {
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.game-stats-summary h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Game Screen */
+.game-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.game-header-info {
+    margin-bottom: 2rem;
+}
+
+.players-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.player-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    min-width: 120px;
+}
+
+.player-card.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    transform: scale(1.05);
+}
+
+.player-symbol {
+    font-size: 2rem;
+    font-weight: bold;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.player-card:not(.active) .player-symbol {
+    background: var(--bg-color);
+    color: var(--text-primary);
+}
+
+.player-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.player-score {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.game-status {
+    text-align: center;
+    flex: 1;
+    margin: 0 1rem;
+}
+
+.current-turn {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.game-progress {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Game Board */
+.game-board-container {
+    position: relative;
+    margin: 2rem auto;
+    width: fit-content;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    background: var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 3px;
+    width: 300px;
+    height: 300px;
+}
+
+.game-cell {
+    background: var(--card-bg);
+    border: none;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: var(--text-primary);
+}
+
+.game-cell:hover:not(.occupied) {
+    background: var(--bg-color);
+    transform: scale(0.95);
+}
+
+.game-cell.occupied {
+    cursor: not-allowed;
+}
+
+.game-cell.x {
+    color: var(--primary-color);
+}
+
+.game-cell.o {
+    color: var(--secondary-color);
+}
+
+.game-cell.winning {
+    background: linear-gradient(135deg, var(--success-color), #68d391);
+    color: white;
+    animation: pulse 1s infinite;
+}
+
+/* Winning Line Animation */
+.winning-line {
+    position: absolute;
+    background: var(--success-color);
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+.winning-line.show {
+    opacity: 0.8;
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    animation: slideIn 0.3s ease;
+}
+
+.modal-header {
+    margin-bottom: 1.5rem;
+}
+
+.result-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.result-icon.win {
+    color: var(--success-color);
+}
+
+.result-icon.draw {
+    color: var(--warning-color);
+}
+
+.modal-header h3 {
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.modal-body p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.game-summary {
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    text-align: left;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.summary-item:last-child {
+    margin-bottom: 0;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes cellPop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.game-cell.pop {
+    animation: cellPop 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .players-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .game-status {
+        margin: 0;
+        order: -1;
+    }
+    
+    .game-board {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .game-cell {
+        font-size: 2.5rem;
+    }
+    
+    .mode-selection {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-board {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .game-cell {
+        font-size: 2rem;
+    }
+    
+    .setup-form,
+    .game-stats-summary {
+        padding: 1rem;
+    }
+    
+    .game-logo h2 {
+        font-size: 2rem;
+    }
+    
+    .player-card {
+        min-width: 100px;
+        padding: 0.5rem;
+    }
+    
+    .player-symbol {
+        font-size: 1.5rem;
+        width: 50px;
+        height: 50px;
+    }
+}
