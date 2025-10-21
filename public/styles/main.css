@@ -6,17 +6,17 @@
 }
 
 :root {
-    --primary-color: #667eea;
-    --primary-dark: #5a67d8;
-    --secondary-color: #764ba2;
-    --accent-color: #f093fb;
-    --success-color: #48bb78;
-    --warning-color: #ed8936;
-    --error-color: #f56565;
+    --primary-color: #f190b0;
+    --primary-dark: #ad5b7a4e;
+    --secondary-color: #c89cf5;
+    --accent-color: #af5cb8;
+    --success-color: #23ea76;
+    --warning-color: #eea970;
+    --error-color: #f54e4e;
     --bg-color: #f7fafc;
     --card-bg: #ffffff;
     --text-primary: #2d3748;
-    --text-secondary: #718096;
+    --text-secondary: #596d8b;
     --border-color: #e2e8f0;
     --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);

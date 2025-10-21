@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HKDSE Results Analyzer</title>
+    <title>HKDSE Personal Analysis Tool</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="analyzer.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -16,138 +16,312 @@
                 <a href="../" class="back-btn">
                     <i class="fas fa-arrow-left"></i> Back to Hub
                 </a>
-                <h1>HKDSE Results Analyzer</h1>
+                <h1>HKDSE Personal Analysis Tool</h1>
             </nav>
         </div>
     </header>
 
     <main class="container">
-        <div class="analyzer-content">
-            <!-- Controls Panel -->
-            <section class="controls-panel">
-                <div class="controls-grid">
+        <div class="analyzer-app">
+            <!-- Step Navigation -->
+            <div class="step-navigation">
+                <div class="step-item active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Core Subjects</div>
+                </div>
+                <div class="step-item" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Electives</div>
+                </div>
+                <div class="step-item" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Personal Info</div>
+                </div>
+                <div class="step-item" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Results</div>
+                </div>
+            </div>
+
+            <!-- Step 1: Core Subjects -->
+            <div class="step-content active" id="step1">
+                <div class="step-header">
+                    <h2><i class="fas fa-graduation-cap"></i> Core Subjects</h2>
+                    <p>Enter your grades for the four core subjects</p>
+                </div>
+
+                <div class="form-grid">
                     <div class="form-group">
-                        <label class="form-label" for="viewType">View Type:</label>
-                        <select id="viewType" class="form-select">
-                            <option value="distribution">Grade Distribution</option>
-                            <option value="cumulative">Cumulative Results</option>
-                            <option value="comparison">Day vs All Candidates</option>
+                        <label class="form-label" for="chinese">
+                            <i class="fas fa-language"></i> Chinese Language
+                        </label>
+                        <select id="chinese" class="form-select core-subject" required>
+                            <option value="">Select Grade</option>
+                            <option value="5**">5**</option>
+                            <option value="5*">5*</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="U">U</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label class="form-label" for="chartType">Chart Type:</label>
-                        <select id="chartType" class="form-select">
-                            <option value="bar">Bar Chart</option>
-                            <option value="line">Line Chart</option>
-                            <option value="doughnut">Pie Chart</option>
+                        <label class="form-label" for="english">
+                            <i class="fas fa-globe"></i> English Language
+                        </label>
+                        <select id="english" class="form-select core-subject" required>
+                            <option value="">Select Grade</option>
+                            <option value="5**">5**</option>
+                            <option value="5*">5*</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="U">U</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="dataType">Data Type:</label>
-                        <select id="dataType" class="form-select">
-                            <option value="number">Number of Candidates</option>
-                            <option value="percentage">Percentage</option>
+                        <label class="form-label" for="mathematics">
+                            <i class="fas fa-calculator"></i> Mathematics
+                        </label>
+                        <select id="mathematics" class="form-select core-subject" required>
+                            <option value="">Select Grade</option>
+                            <option value="5**">5**</option>
+                            <option value="5*">5*</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="U">U</option>
                         </select>
                     </div>
 
-                    <button id="updateChart" class="btn btn-primary">
-                        <i class="fas fa-sync-alt"></i> Update Chart
-                    </button>
-                </div>
-            </section>
-
-            <!-- Statistics Summary -->
-            <section class="stats-summary">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-value" id="totalCandidates">--</div>
-                            <div class="stat-label">Total Candidates</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-value" id="topPerformers">--</div>
-                            <div class="stat-label">Top Grade (35-33)</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-value" id="passRate">--</div>
-                            <div class="stat-label">Pass Rate (≥20)</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="stat-value" id="excellenceRate">--</div>
-                            <div class="stat-label">Excellence Rate (≥30)</div>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label" for="csd">
+                            <i class="fas fa-users"></i> Citizenship and Social Development
+                        </label>
+                        <select id="csd" class="form-select core-subject" required>
+                            <option value="">Select Status</option>
+                            <option value="Attained">Attained</option>
+                            <option value="Not Attained">Not Attained</option>
+                        </select>
                     </div>
                 </div>
-            </section>
 
-            <!-- Chart Container -->
-            <section class="chart-container">
-                <h2 id="chartTitle">HKDSE Results Distribution</h2>
-                <div class="chart-wrapper">
-                    <canvas id="mainChart"></canvas>
-                </div>
-            </section>
-
-            <!-- Data Table -->
-            <section class="data-table-section">
-                <h3>Detailed Results</h3>
-                <div class="table-container">
-                    <table id="dataTable" class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Grade Range</th>
-                                <th>Day School</th>
-                                <th>Day School %</th>
-                                <th>All Candidates</th>
-                                <th>All Candidates %</th>
-                                <th>Cumulative</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            <!-- Data will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Export Options -->
-            <section class="export-section">
-                <h3>Export Data</h3>
-                <div class="export-buttons">
-                    <button id="exportPNG" class="btn btn-secondary">
-                        <i class="fas fa-image"></i> Export as PNG
-                    </button>
-                    <button id="exportCSV" class="btn btn-secondary">
-                        <i class="fas fa-file-csv"></i> Export as CSV
-                    </button>
-                    <button id="exportJSON" class="btn btn-secondary">
-                        <i class="fas fa-file-code"></i> Export as JSON
+                <div class="step-actions">
+                    <button class="btn btn-primary" onclick="nextStep()">
+                        Next: Elective Subjects <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
-            </section>
+            </div>
+
+            <!-- Step 2: Elective Subjects -->
+            <div class="step-content" id="step2">
+                <div class="step-header">
+                    <h2><i class="fas fa-plus-circle"></i> Elective Subjects</h2>
+                    <p>Add your elective subjects (optional but recommended)</p>
+                </div>
+
+                <div class="electives-container">
+                    <div class="elective-item" id="elective1">
+                        <div class="form-group">
+                            <label class="form-label">Elective Subject 1</label>
+                            <div class="elective-row">
+                                <select class="form-select elective-subject">
+                                    <option value="">Select Subject</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Geography">Geography</option>
+                                    <option value="History">History</option>
+                                    <option value="ICT">Information and Communication Technology</option>
+                                    <option value="Liberal Studies">Liberal Studies</option>
+                                    <option value="Literature">Literature in English</option>
+                                    <option value="M1">Mathematics Extended Module 1</option>
+                                    <option value="M2">Mathematics Extended Module 2</option>
+                                    <option value="Visual Arts">Visual Arts</option>
+                                    <option value="Business">Business, Accounting and Financial Studies</option>
+                                    <option value="Chinese Literature">Chinese Literature</option>
+                                    <option value="Chinese History">Chinese History</option>
+                                    <option value="Ethics">Ethics and Religious Studies</option>
+                                    <option value="Health Management">Health Management and Social Care</option>
+                                    <option value="Music">Music</option>
+                                    <option value="PE">Physical Education</option>
+                                    <option value="Technology">Technology and Living</option>
+                                    <option value="Tourism">Tourism and Hospitality Studies</option>
+                                </select>
+                                <select class="form-select elective-grade">
+                                    <option value="">Grade</option>
+                                    <option value="5**">5**</option>
+                                    <option value="5*">5*</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                    <option value="U">U</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="electives-actions">
+                    <button class="btn btn-secondary" onclick="addElective()">
+                        <i class="fas fa-plus"></i> Add Another Elective
+                    </button>
+                </div>
+
+                <div class="step-actions">
+                    <button class="btn btn-outline" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()">
+                        Next: Personal Info <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Personal Information -->
+            <div class="step-content" id="step3">
+                <div class="step-header">
+                    <h2><i class="fas fa-user"></i> Personal Information</h2>
+                    <p>Optional information for better analysis (all fields optional)</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="gender">Gender</label>
+                        <select id="gender" class="form-select">
+                            <option value="">Prefer not to say</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="schoolType">School Type</label>
+                        <select id="schoolType" class="form-select">
+                            <option value="">Select School Type</option>
+                            <option value="Government">Government School</option>
+                            <option value="Aided">Aided School</option>
+                            <option value="Direct Subsidy">Direct Subsidy Scheme</option>
+                            <option value="Private">Private School</option>
+                            <option value="International">International School</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" for="targetUniversity">Target University/Programme (Optional)</label>
+                        <input type="text" id="targetUniversity" class="form-input" placeholder="e.g., HKU Medicine, CUHK Business">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label" for="additionalInfo">Additional Information (Optional)</label>
+                        <textarea id="additionalInfo" class="form-input" rows="3" placeholder="Any additional context or information..."></textarea>
+                    </div>
+                </div>
+
+                <div class="step-actions">
+                    <button class="btn btn-outline" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="btn btn-success" onclick="calculateResults()">
+                        <i class="fas fa-chart-line"></i> Analyze My Results
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Results -->
+            <div class="step-content" id="step4">
+                <div class="step-header">
+                    <h2><i class="fas fa-chart-bar"></i> Your HKDSE Analysis</h2>
+                    <p>Comprehensive analysis of your results and university admission prospects</p>
+                </div>
+
+                <!-- Score Summary -->
+                <div class="results-section">
+                    <h3><i class="fas fa-calculator"></i> Score Summary</h3>
+                    <div class="score-cards">
+                        <div class="score-card">
+                            <div class="score-value" id="totalScore">--</div>
+                            <div class="score-label">Total Score</div>
+                            <div class="score-detail" id="scoreBreakdown">Core + Best Electives</div>
+                        </div>
+                        <div class="score-card">
+                            <div class="score-value" id="coreScore">--</div>
+                            <div class="score-label">Core Subjects</div>
+                            <div class="score-detail">Chinese + English + Math + CSD</div>
+                        </div>
+                        <div class="score-card">
+                            <div class="score-value" id="electiveScore">--</div>
+                            <div class="score-label">Best Electives</div>
+                            <div class="score-detail" id="electiveDetail">Top elective subjects</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- University Admission Eligibility -->
+                <div class="results-section">
+                    <h3><i class="fas fa-university"></i> University Admission Eligibility</h3>
+                    <div class="eligibility-status" id="eligibilityStatus">
+                        <div class="eligibility-indicator" id="eligibilityIndicator">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Calculating...</span>
+                        </div>
+                        <div class="requirements-breakdown" id="requirementsBreakdown">
+                            <!-- Requirements will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ranking and Statistics -->
+                <div class="results-section">
+                    <h3><i class="fas fa-trophy"></i> Your Performance Ranking</h3>
+                    <div class="ranking-display" id="rankingDisplay">
+                        <!-- Ranking information will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Improvement Suggestions -->
+                <div class="results-section">
+                    <h3><i class="fas fa-lightbulb"></i> Improvement Suggestions</h3>
+                    <div class="suggestions-container" id="suggestionsContainer">
+                        <!-- Suggestions will be populated here -->
+                    </div>
+                </div>
+
+                <!-- What-If Analysis -->
+                <div class="results-section">
+                    <h3><i class="fas fa-sync-alt"></i> What-If Analysis</h3>
+                    <div class="whatif-container">
+                        <p>Try different grade combinations to see how they affect your chances:</p>
+                        <button class="btn btn-outline" onclick="showWhatIfAnalysis()">
+                            <i class="fas fa-flask"></i> Open What-If Calculator
+                        </button>
+                    </div>
+                </div>
+
+                <div class="step-actions">
+                    <button class="btn btn-outline" onclick="prevStep()">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="btn btn-primary" onclick="resetForm()">
+                        <i class="fas fa-redo"></i> Start New Analysis
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportResults()">
+                        <i class="fas fa-download"></i> Export Results
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
 
