@@ -566,10 +566,13 @@ const TicTacToeApp = () => {
             difficulty: settings.difficulty,
             players: settings.players
         };
-        
-        setGameHistory(prev => [...prev, newGame]);
-        setCurrentGameIndex(gameHistory.length);
-        setCurrentMoveIndex(-1);
+        // Append the new game and set the current index based on the updated history
+        setGameHistory(prev => {
+            const newHist = [...prev, newGame];
+            setCurrentGameIndex(newHist.length - 1);
+            setCurrentMoveIndex(-1);
+            return newHist;
+        });
     };
 
     const makeMove = (position) => {
@@ -607,12 +610,14 @@ const TicTacToeApp = () => {
 
         const updatedHistory = [...gameHistory];
         updatedHistory[currentGameIndex] = updatedGame;
+
+        // Update history atomically and then recalculate stats using the fresh history
         setGameHistory(updatedHistory);
         setCurrentMoveIndex(-1);
 
-        // Update stats if game is complete
+        // Update stats if game is complete (pass the updated history for accurate calculation)
         if (winner !== null) {
-            updateStats(updatedGame);
+            updateStatsWithHistory(updatedHistory);
         }
 
         // Computer move in PvC mode
@@ -642,23 +647,46 @@ const TicTacToeApp = () => {
     };
 
     const updateStats = (game) => {
+        // Recalculate statistics based on the full, updated history
         setStats(prevStats => {
-            const newStats = { ...prevStats };
-            newStats.totalGames++;
-            
-            if (game.winner === 'X') {
-                newStats.player1Wins++;
-            } else if (game.winner === 'O') {
-                newStats.player2Wins++;
-            } else {
-                newStats.draws++;
-            }
+            // Try to derive authoritative stats from gameHistory (caller should ensure history was updated before calling)
+            const allGames = gameHistory;
+            const completedGames = allGames.filter(g => g.moves && g.moves.length > 0);
 
-            // Calculate average moves
-            const totalMoves = gameHistory.reduce((sum, g) => sum + g.moves.length, 0) + game.moves.length;
-            newStats.averageMoves = Math.round(totalMoves / newStats.totalGames);
+            const totalGames = completedGames.length;
+            const player1Wins = completedGames.filter(g => g.winner === 'X').length;
+            const player2Wins = completedGames.filter(g => g.winner === 'O').length;
+            const draws = completedGames.filter(g => !g.winner && g.moves.length > 0 && g.moves.length % 1 === 0 && g.moves.length <= 9 && (g.moves.length === 9 || !g.winner)).length;
+            const totalMoves = completedGames.reduce((s, g) => s + (g.moves ? g.moves.length : 0), 0);
+            const averageMoves = totalGames > 0 ? Math.round(totalMoves / totalGames) : 0;
 
-            return newStats;
+            return {
+                totalGames,
+                player1Wins,
+                player2Wins,
+                draws,
+                averageMoves
+            };
+        });
+    };
+
+    const updateStatsWithHistory = (historyArray) => {
+        const allGames = historyArray || [];
+        const completedGames = allGames.filter(g => g.moves && g.moves.length > 0);
+
+        const totalGames = completedGames.length;
+        const player1Wins = completedGames.filter(g => g.winner === 'X').length;
+        const player2Wins = completedGames.filter(g => g.winner === 'O').length;
+        const draws = completedGames.filter(g => !g.winner && g.moves.length > 0 && (g.moves.length === 9 || !g.winner)).length;
+        const totalMoves = completedGames.reduce((s, g) => s + (g.moves ? g.moves.length : 0), 0);
+        const averageMoves = totalGames > 0 ? Math.round(totalMoves / totalGames) : 0;
+
+        setStats({
+            totalGames,
+            player1Wins,
+            player2Wins,
+            draws,
+            averageMoves
         });
     };
 
@@ -672,10 +700,12 @@ const TicTacToeApp = () => {
             difficulty: gameSettings.difficulty,
             players: gameSettings.players
         };
-        
-        setGameHistory(prev => [...prev, newGameData]);
-        setCurrentGameIndex(gameHistory.length);
-        setCurrentMoveIndex(-1);
+        setGameHistory(prev => {
+            const newHist = [...prev, newGameData];
+            setCurrentGameIndex(newHist.length - 1);
+            setCurrentMoveIndex(-1);
+            return newHist;
+        });
     };
 
     const undoMove = () => {
@@ -789,5 +819,10 @@ const TicTacToeApp = () => {
     );
 };
 
-// Render the app
-ReactDOM.render(<TicTacToeApp />, document.getElementById('root'));
+// Render the app (React 18+ compatibility)
+const rootEl = document.getElementById('root');
+if (ReactDOM.createRoot) {
+    ReactDOM.createRoot(rootEl).render(<TicTacToeApp />);
+} else {
+    ReactDOM.render(<TicTacToeApp />, rootEl);
+}
