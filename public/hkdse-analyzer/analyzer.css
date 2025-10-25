@@ -1,6 +1,6 @@
 /* HKDSE Personal Analysis Tool Styles */
 .analyzer-header {
-    background: rgb(211, 252, 161);
+    background: #BADFDB;
     color: black;
     padding: 1rem 0;
 }
@@ -23,7 +23,7 @@
 }
 
 .back-btn:hover {
-    background: rgba(234, 60, 60, 0.1);
+    background: rgba(186, 223, 219, 0.1);
 }
 
 /* Main App Container */
@@ -227,7 +227,7 @@
 }
 
 .remove-elective:hover {
-    background: #e53e3e;
+    background: #BADFDB;
     transform: scale(1.1);
 }
 
@@ -258,7 +258,7 @@
 }
 
 .btn-success:hover {
-    background: #38a169;
+    background: #BADFDB;
 }
 
 /* Results Section */
